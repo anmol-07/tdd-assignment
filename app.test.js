@@ -23,10 +23,16 @@ test("Test case to handle unknown amount of numbers", () => {
   let resultingRandomArray = createRandomArray(randomInteger, randomInteger);
 
   // sums up the resultant array
-  const sumOfArrayOfUnknownAmountOfNumbers = resultingRandomArray.reduce((previousValue, nextValue) => previousValue + nextValue, 0);
+  const sumOfArrayOfUnknownAmountOfNumbers = resultingRandomArray.reduce((previousValue, nextValue) => previousValue + nextValue,0);
 
   // converts the array to a string
   let resultingRandomArrayToString = resultingRandomArray.join();
 
-  expect(add(resultingRandomArrayToString)).toBe(sumOfArrayOfUnknownAmountOfNumbers);
+  expect(add(resultingRandomArrayToString)).toBe(
+    sumOfArrayOfUnknownAmountOfNumbers
+  );
+});
+
+test("Test case for passing \n next line character in string", () => {
+  expect(add("1,2\n3\n6,5\n7")).toBe(24);
 });
