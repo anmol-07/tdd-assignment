@@ -23,7 +23,10 @@ test("Test case to handle unknown amount of numbers", () => {
   let resultingRandomArray = createRandomArray(randomInteger, randomInteger);
 
   // sums up the resultant array
-  const sumOfArrayOfUnknownAmountOfNumbers = resultingRandomArray.reduce((previousValue, nextValue) => previousValue + nextValue,0);
+  const sumOfArrayOfUnknownAmountOfNumbers = resultingRandomArray.reduce(
+    (previousValue, nextValue) => previousValue + nextValue,
+    0
+  );
 
   // converts the array to a string
   let resultingRandomArrayToString = resultingRandomArray.join();
@@ -35,4 +38,13 @@ test("Test case to handle unknown amount of numbers", () => {
 
 test("Test case for passing \n next line character in string", () => {
   expect(add("1,2\n3\n6,5\n7")).toBe(24);
+});
+
+test("Test case for negative numbers in string", () => {
+  expect(add("1,-2")).toThrow(new Error('negatives not allowed'));
+});
+
+
+test("Test case for string with delemiters", () => {
+  expect(add("//;\n1;2")).toBe(3);
 });
