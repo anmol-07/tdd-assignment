@@ -41,10 +41,18 @@ test("Test case for passing \n next line character in string", () => {
 });
 
 test("Test case for negative numbers in string", () => {
-  expect(add("1,-2")).toThrow(new Error('negatives not allowed'));
+  expect(() => add("1,-2")).toThrow();
 });
 
 
 test("Test case for string with delemiters", () => {
-  expect(add("//;\n1;2")).toBe(3);
+  expect(add("//;\n1;2;5")).toBe(8);
+});
+
+test("Test case for number greater than 1000", () => {
+  expect(add("2, 10001")).toBe(2);
+});
+
+test("Test case for string with delemiters *", () => {
+  expect(add("//*\n1*2*3*4*5")).toBe(120);
 });

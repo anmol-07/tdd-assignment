@@ -5,22 +5,27 @@ function findSeperator(numbersString) { // made a function to find out deleimite
 }
 function add(commaSeperatedStringOfNumbers) {
   const seperatorInString = findSeperator(commaSeperatedStringOfNumbers);
-  commaSeperatedStringOfNumbers = commaSeperatedStringOfNumbers.replace(/\n/g,","); //to replace \n if present in the string
-  if (seperatorInString) {  // for replacing the delemiter with , 
-    commaSeperatedStringOfNumbers = commaSeperatedStringOfNumbers
-      .replace(new RegExp(seperatorInString, "g"), ",")
-      .replace("//", "")
-      .replace(/^,+/, "");
+  let numberArray = [];
+  if (seperatorInString) {  // for replacing the delemiter with ,
+    commaSeperatedStringOfNumbers = commaSeperatedStringOfNumbers.replace(/\n/g, "").replace("//", "").replace(seperatorInString, ""); //to replace \n if present in the string 
+    numberArray = commaSeperatedStringOfNumbers.split(seperatorInString);
   }
-  const numberArray = commaSeperatedStringOfNumbers.split(","); //spliting the string on ,
-  let totalSum = 0;
+  else{
+    commaSeperatedStringOfNumbers = commaSeperatedStringOfNumbers.replace(/\n/g,","); //to replace \n if present in the string
+     numberArray = commaSeperatedStringOfNumbers.split(","); //spliting the string on ,
+  }
+  let totalSum = seperatorInString !== '*' ? 0 : 1;
+  // let multiProduct = 1;
   let negativeNumberArray = [];
   for (let i = 0; i < numberArray.length; i++) {
-    if (!numberArray[i].includes("-")) totalSum += Number(numberArray[i]);
-    else negativeNumberArray.push(Number(numberArray[i]));
+    if (!numberArray[i].includes("-") && numberArray[i] < 1000 && seperatorInString !== '*') totalSum += Number(numberArray[i]);
+    else if(!numberArray[i].includes("-") && numberArray[i] < 1000 && seperatorInString === '*') {
+      totalSum *= Number(numberArray[i]);
+    }
+    else if(numberArray[i].includes("-")) negativeNumberArray.push(Number(numberArray[i]));
   }
   if (negativeNumberArray.length > 0)
-    throw new Error("negatives not allowed: " + negativeNumberArray.toString());
+    throw "negatives not allowed: " + negativeNumberArray.toString();
   return totalSum;
 }
 module.exports = add;
