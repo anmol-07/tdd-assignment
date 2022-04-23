@@ -54,5 +54,9 @@ test("Test case for number greater than 1000", () => {
 });
 
 test("Test case for string with delemiters *", () => {
-  expect(add("//*\n1*2*3*4*5")).toBe(120);
+  expect(add("//*\n1*2*3*4*5*10*100")).toBe(120000);
+});
+
+test("Test case for string with delemiters /", () => {
+  expect(add("///\n50/2/5")).toBe(5);
 });
